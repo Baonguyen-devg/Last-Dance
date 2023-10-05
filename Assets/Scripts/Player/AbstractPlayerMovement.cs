@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -11,18 +10,8 @@ namespace DefaultNamespace
         [SerializeField] protected Transform headTransform;
         [SerializeField] protected Rigidbody2D thighBody2D;
         [SerializeField] protected float outSideVelocityRate = 2;
-        private bool isHasInput;
         
-        
-        private void Start()
-        {
-            hingeControl.SetIsTurnOnMotorAndLimit(true);
-        }
-
-        // [Header("Rotate Move")]
-        // [SerializeField] protected float motorSpeed = 5000;
-        // [SerializeField] protected float maximumMotorForce = 4000;
-        // [SerializeField] protected float angleIncrease = 2f;
+        private void Start() => hingeControl.SetIsTurnOnMotorAndLimit(true);
 
         private void FixedUpdate()
         {
@@ -36,7 +25,6 @@ namespace DefaultNamespace
             bool isUpKeyPressed = GetUpKey();
             bool isRightKeyPressed = GetRightKey();
             bool isPress = isLeftKeyPressed || isUpKeyPressed || isRightKeyPressed;
-            this.isHasInput = isPress;
                 
             if (!isPress) { ResetValueAndState(); return;}
 
@@ -50,14 +38,8 @@ namespace DefaultNamespace
             if (isUpKeyPressed) MoveUp(targetRotationEuler);
             if (isRightKeyPressed) MoveToRight(forceDirection);
             
-            // if (isLeftKeyPressed || isRightKeyPressed)
-            //     StopRotate();
-            // else 
-            //     SetRotate();
             if (!isLeftKeyPressed && !isRightKeyPressed)
-            {
                 hingeControl.SetIsTurnOnMotorAndLimit(false);
-            }
             
             if(isLeftKeyPressed || isRightKeyPressed) hingeControl.SetMotor(0, 0);
         }
@@ -78,22 +60,7 @@ namespace DefaultNamespace
         protected abstract Vector3 GetForceDirection(float targetRotationEuler);
 
         protected abstract void MoveToLeft(Vector2 forceDirection);
-
         protected abstract void MoveUp(float targetRotationEuler);
-        
         protected abstract void MoveToRight(Vector2 forceDirection);
-        
-        protected virtual void StopRotate()
-        {
-            hingeControl.SetMotor(0, 0);
-            hingeControl.IncreaseAngle(0);
-        }
-        
-        protected virtual void SetRotate()
-        {
-            
-        }
-
-        public bool IsHasInput() => this.isHasInput;
     }
 }

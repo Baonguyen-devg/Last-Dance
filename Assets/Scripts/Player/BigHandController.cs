@@ -1,28 +1,33 @@
-using DefaultNamespace;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BigHandController : MonoBehaviour
 {
-    [SerializeField] private PlayerOneCtrl playerOneCtrl;
-    [SerializeField] private PlayerTwoCtrl playerTwoCtrl;
-    private Rigidbody2D rigidbody2D;
-
+    private new Rigidbody2D rigidbody2D;
+    private const float GRAVITY_COORDINATE_Y_LIMIT_MIN = 1F;
+    private const float GRAVITY_COORDINATE_Y_LIMIT_MAX = 2F;
+    private const float GRAVITY_NORMAL = 5F;
+    private const float GRAVITY_RATE_OUT_LIMIT_MAX = 20F;
+    
     private void Start() => rigidbody2D = GetComponent<Rigidbody2D>();
 
-    private void FixedUpdate() => GravityControl();
+    private void FixedUpdate()
+    {
+        if (!GameManager.Instance.IsGamePlaying()) return;
+        GravityControl();
+    }
 
     private void GravityControl()
     {
-        float scale = transform.position.y;
-        rigidbody2D.mass = scale >= 1 ? scale * 6f : 3;
-        rigidbody2D.gravityScale = scale >= 1 ? scale * 4f : 3;
-        //rigidbody2D.mass = IsHasControl() ? scale * 5f : 3;
-        //rigidbody2D.gravityScale = IsHasControl() ? scale * 2f : 3;
+        float gravityScale = CalculateGravityScale();
+        rigidbody2D.mass = gravityScale;
+        rigidbody2D.gravityScale = gravityScale;
     }
 
-    private bool IsHasControl()
+    private float CalculateGravityScale()
     {
-        return playerOneCtrl.GetPlayerMovement().IsHasInput() 
-               || playerTwoCtrl.GetPlayerMovement().IsHasInput();
+        float newYPosition = Mathf.Max(transform.position.y, GRAVITY_COORDINATE_Y_LIMIT_MIN);
+        return newYPosition < GRAVITY_COORDINATE_Y_LIMIT_MAX
+            ? GRAVITY_NORMAL : newYPosition * GRAVITY_RATE_OUT_LIMIT_MAX;
     }
 }

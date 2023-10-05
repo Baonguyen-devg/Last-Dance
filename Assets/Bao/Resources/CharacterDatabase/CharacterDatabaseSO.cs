@@ -5,10 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterDatabase", menuName = "ScriptableObjects/CharacterDatabase")]
 public class CharacterDatabaseSO : ScriptableObject 
 {
-<<<<<<< HEAD
     [Header("[ Character list ]"), Space(6)]
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
     [SerializeField] private Character[] characters;
     public Character[] Characters => this.characters;
 
