@@ -1157,7 +1157,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &181617467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,8 +1272,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181617467}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &193048454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1476,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &229351041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,8 +1552,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229351041}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &245144439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,11 +1567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-<<<<<<< HEAD
   m_IsActive: 0
-=======
-  m_IsActive: 1
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!4 &245144440
 Transform:
   m_ObjectHideFlags: 0
@@ -2874,11 +2864,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7fd6b7e05e46bd945b5ed5f78030d017, type: 2}
     - target: {fileID: 7058090151146979082, guid: f36628d7ab39ddf4e99b8a9dd9b02060, type: 3}
       propertyPath: namePlayer
-<<<<<<< HEAD
       value: Player_Two
-=======
-      value: Player_2
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
       objectReference: {fileID: 0}
     - target: {fileID: 7058090151146979082, guid: f36628d7ab39ddf4e99b8a9dd9b02060, type: 3}
       propertyPath: characterCarousel
@@ -4085,7 +4071,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &705099849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4170,8 +4155,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &710137673
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,11 +4394,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-<<<<<<< HEAD
   m_ConstrainProportionsScale: 1
-=======
-  m_ConstrainProportionsScale: 0
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
   m_Children: []
   m_Father: {fileID: 1199099534}
   m_RootOrder: 2
@@ -4934,7 +4913,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &887650990
 GameObject:
   m_ObjectHideFlags: 0
@@ -5011,8 +4989,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887650990}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &896179869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5090,11 +5066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: -183.31}
-=======
-  m_AnchoredPosition: {x: 0, y: -179.9}
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
   m_SizeDelta: {x: 120.58, y: 44.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &911295359
@@ -5193,13 +5165,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 911295359}
   clickAudio: {fileID: 1712024052}
-<<<<<<< HEAD
   animator: {fileID: 911295363}
   battleVSPanel: {fileID: 181617468}
   battleVSPanelAnimator: {fileID: 181617470}
-=======
-  animator: {fileID: 0}
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!95 &911295363
 Animator:
   serializedVersion: 4
@@ -5843,7 +5811,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &1113831661
 GameObject:
   m_ObjectHideFlags: 0
@@ -5882,8 +5849,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 400, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1129466988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5922,7 +5887,6 @@ Transform:
   m_Father: {fileID: 1532433262}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &1145795308
 GameObject:
   m_ObjectHideFlags: 0
@@ -6007,8 +5971,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1145946320
 GameObject:
   m_ObjectHideFlags: 0
@@ -6561,10 +6523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 144075516}
-<<<<<<< HEAD
   direction: {x: -1, y: 0, z: 0}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
   len: 19.2
   posCamera: 0
   speed: 0.01
@@ -8495,7 +8454,6 @@ Transform:
   m_Father: {fileID: 66351827}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &1511899514
 GameObject:
   m_ObjectHideFlags: 0
@@ -8573,8 +8531,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511899514}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1532433261
 GameObject:
   m_ObjectHideFlags: 0
@@ -8990,7 +8946,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &1651675639
 GameObject:
   m_ObjectHideFlags: 0
@@ -9029,8 +8984,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: 0}
   m_SizeDelta: {x: 400, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1667924457
 GameObject:
   m_ObjectHideFlags: 0
@@ -9044,10 +8997,7 @@ GameObject:
   - component: {fileID: 1667924459}
   - component: {fileID: 1667924458}
   - component: {fileID: 1667924463}
-<<<<<<< HEAD
   - component: {fileID: 1667924464}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -9129,10 +9079,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1199099534}
-<<<<<<< HEAD
   - {fileID: 181617468}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9159,7 +9106,6 @@ MonoBehaviour:
   buttonRight: {fileID: 2122995610}
   buttonExit: {fileID: 1869155691}
   buttonFight: {fileID: 911295359}
-<<<<<<< HEAD
 --- !u!95 &1667924464
 Animator:
   serializedVersion: 4
@@ -9180,8 +9126,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1678533755
 GameObject:
   m_ObjectHideFlags: 0
@@ -9434,7 +9378,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &1701232405
 GameObject:
   m_ObjectHideFlags: 0
@@ -9515,8 +9458,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701232405}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1712024051
 GameObject:
   m_ObjectHideFlags: 0
@@ -10232,7 +10173,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &1837005633
 GameObject:
   m_ObjectHideFlags: 0
@@ -10313,8 +10253,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837005633}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &1840339003
 GameObject:
   m_ObjectHideFlags: 0
@@ -11006,7 +10944,6 @@ Transform:
   m_Father: {fileID: 143494602}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &2078041948
 GameObject:
   m_ObjectHideFlags: 0
@@ -11084,8 +11021,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078041948}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
 --- !u!1 &2084953902
 GameObject:
   m_ObjectHideFlags: 0
@@ -11624,7 +11559,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 5289831590186522861, guid: f36628d7ab39ddf4e99b8a9dd9b02060, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -11645,8 +11579,6 @@ PrefabInstance:
       propertyPath: namePlayer
       value: Player_One
       objectReference: {fileID: 0}
-=======
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
     - target: {fileID: 7058090151146979082, guid: f36628d7ab39ddf4e99b8a9dd9b02060, type: 3}
       propertyPath: characterCarousel
       value: 

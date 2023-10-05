@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -6,19 +5,32 @@ namespace DefaultNamespace
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField] private Transform targetTransform;
-        private float defaultYPosition;
-
-        private void Start()
-        {
-            defaultYPosition = targetTransform.position.y;
-        }
+        [SerializeField] private float smoothnessRand = 10;
+        [SerializeField] private float smoothnessSpeedMin = 1;
+        [SerializeField] private float smoothnessSpeedMax = 6;
         
+        //CameraZoom with field of view
+        // private Camera camera;
+        //
+        // private void Start()
+        // {
+        //     camera = GetComponent<Camera>();
+        // }
+
         private void LateUpdate()
         {
-            Vector3 positionFollow = targetTransform.position;
-            positionFollow.y = defaultYPosition;
-            positionFollow.z = this.transform.position.z;
-            this.transform.position = positionFollow;
+            Vector3 targetPosition = targetTransform.position;
+            targetPosition.y = Mathf.Clamp(targetPosition.y, 0, 1);
+            targetPosition.z = transform.position.z;
+            
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * GetSmoothTime());
+        }
+
+        public float GetSmoothTime()
+        {
+            float distanceX = Mathf.Abs(transform.position.x - targetTransform.position.x);
+            float smoothTime = distanceX / smoothnessRand;
+            return Mathf.Clamp(smoothTime, smoothnessSpeedMin, smoothnessSpeedMax); 
         }
     }
 }

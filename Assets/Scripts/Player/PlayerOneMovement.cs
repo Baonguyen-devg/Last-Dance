@@ -8,10 +8,8 @@ namespace DefaultNamespace
         protected override bool GetUpKey() => InputManager.Instance.IsWPressed();
         protected override bool GetRightKey() => InputManager.Instance.IsDPressed();
 
-        protected override Vector3 GetForceDirection(float targetRotationEuler)
-        {
-            return Quaternion.Euler(0f, 0f, targetRotationEuler) * (Vector2.up + Vector2.right);
-        }
+        protected override Vector3 GetForceDirection(float targetRotationEuler) 
+            => Quaternion.Euler(0f, 0f, targetRotationEuler) * (Vector2.up + Vector2.right);
 
         protected override void MoveToLeft(Vector2 forceDirection)
         {
@@ -30,11 +28,5 @@ namespace DefaultNamespace
 
         protected override void MoveToRight(Vector2 forceDirection) 
             => headRigidBody2D.velocity = forceDirection.normalized * forcePush;
-        
-        // protected override void SetRotate()
-        // {
-        //     hingeControl.SetMotor(motorSpeed, maximumMotorForce);
-        //     hingeControl.IncreaseAngle(angleIncrease);
-        // }
     }
 }

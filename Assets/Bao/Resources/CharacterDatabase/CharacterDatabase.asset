@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CharacterDatabase
   m_EditorClassIdentifier: 
   characters:
-<<<<<<< HEAD
   - nameCharacter: Random
     sprite: {fileID: 21300000, guid: 96d9e45cca20a6141b166f25db2e0acf, type: 3}
   - nameCharacter: Nguyen Thai Bao
@@ -32,21 +31,3 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
   - nameCharacter: Tran Van Bao Thang
     sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
-=======
-  - nameCharacter: Nguyen Thai Bao
-    sprite: {fileID: 21300000, guid: 8151d74f465d88140ae1c4dd8f0e0767, type: 3}
-  - nameCharacter: Tran Van Bao Thang
-    sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
-  - nameCharacter: Tran Van Bao Thang
-    sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
-  - nameCharacter: Tran Van Bao Thang
-    sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
-  - nameCharacter: Tran Van Bao Thang
-    sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
-  - nameCharacter: Luu Thanh Dat
-    sprite: {fileID: 21300000, guid: 058ea02fe5aab4c4482f8ab1c2fe2c6d, type: 3}
-  - nameCharacter: Luu Thanh Dat
-    sprite: {fileID: 21300000, guid: 058ea02fe5aab4c4482f8ab1c2fe2c6d, type: 3}
-  - nameCharacter: Luu Thanh Dat
-    sprite: {fileID: 21300000, guid: 058ea02fe5aab4c4482f8ab1c2fe2c6d, type: 3}
->>>>>>> 32f85e2714d5c4f32b798d9431a29ac4eefeea13
