@@ -14,13 +14,13 @@ namespace DefaultNamespace
             if (!GameManager.Instance.IsGamePlaying())
             {
                 Time.timeScale = 1;
+                isSlowMotion = true;
                 return;
             }
             
             if (IsWarning() && !isSlowMotion)
             {
                 isSlowMotion = true;
-                //StartCoroutine(ChangeTimeScale(timeScaleSlowMotion));
                 DoSlowMotion();
             }
 
@@ -43,23 +43,5 @@ namespace DefaultNamespace
             Time.timeScale = slowMotionFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
-
-        // private IEnumerator ChangeTimeScale(float targetTimeScale)
-        // {
-        //     float startScale = Time.timeScale;
-        //     float startTime = Time.time;
-        //     float elapsedTime = 0f;
-        //     float transitionDuration = 0.2f; // Thời gian chuyển đổi
-        //
-        //     while (elapsedTime < transitionDuration)
-        //     {
-        //         float t = elapsedTime / transitionDuration;
-        //         Time.timeScale = Mathf.Lerp(startScale, targetTimeScale, t);
-        //         elapsedTime = Time.time - startTime;
-        //         yield return null;
-        //     }
-        //
-        //     Time.timeScale = targetTimeScale;
-        // }
     }
 }

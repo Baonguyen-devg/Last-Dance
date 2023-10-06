@@ -1114,6 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5719b916c1394d7cbc47ae7a6afddf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reflectForce: 10
 --- !u!1 &342976442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,7 +1518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headPlayerOne: {fileID: 285619331}
   headPlayerTwo: {fileID: 925871913}
-  coordinateYWarning: -1
+  coordinateYWarning: -1.8
 --- !u!1 &403865398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &665964125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,7 +2436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &787427178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2851,8 +2852,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 1000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 40
+    m_LowerAngle: -10
+    m_UpperAngle: 46
 --- !u!70 &863954260
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2949,7 +2950,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: 50
-  force: 30
+  targetRotationAnimaiton: -180
+  rotationForce: 80
 --- !u!1 &872445916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,6 +3099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5719b916c1394d7cbc47ae7a6afddf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reflectForce: 10
 --- !u!1 &926001860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,7 +3244,7 @@ HingeJoint2D:
     m_MaximumMotorForce: 100
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
+    m_LowerAngle: -91
     m_UpperAngle: 10
 --- !u!70 &950586090
 CapsuleCollider2D:
@@ -3339,7 +3342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: -50
-  force: 30
+  targetRotationAnimaiton: 90
+  rotationForce: 80
 --- !u!1 &963843779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3469,6 +3473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 979239931}
   - component: {fileID: 979239932}
+  - component: {fileID: 979239933}
   m_Layer: 0
   m_Name: Player_Two
   m_TagString: Untagged
@@ -3514,6 +3519,21 @@ MonoBehaviour:
   headTransform: {fileID: 925871913}
   thighBody2D: {fileID: 1796989113}
   outSideVelocityRate: 1.5
+--- !u!114 &979239933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979239929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075b2f10fab407aa1ccd6ed2c08afcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thighBalance: {fileID: 1796989114}
+  legBalance: {fileID: 1994478307}
+  footBalance: {fileID: 0}
 --- !u!1 &985637461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3628,7 +3648,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: 0
-  force: 30
+  targetRotationAnimaiton: 91
+  rotationForce: 80
 --- !u!233 &1015367049
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -3651,8 +3672,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 0
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -40
-    m_UpperAngle: 5
+    m_LowerAngle: -100
+    m_UpperAngle: 2
 --- !u!70 &1015367050
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5029,7 +5050,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: -50
-  force: 30
+  targetRotationAnimaiton: 180
+  rotationForce: 80
 --- !u!233 &1796989115
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -5052,8 +5074,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 1000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 40
-    m_UpperAngle: 0
+    m_LowerAngle: 10
+    m_UpperAngle: -46
 --- !u!70 &1796989116
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5513,6 +5535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1882435414}
   - component: {fileID: 1882435415}
+  - component: {fileID: 1882435416}
   m_Layer: 0
   m_Name: Player_One
   m_TagString: Untagged
@@ -5558,6 +5581,21 @@ MonoBehaviour:
   headTransform: {fileID: 285619331}
   thighBody2D: {fileID: 863954258}
   outSideVelocityRate: 1.5
+--- !u!114 &1882435416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882435412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075b2f10fab407aa1ccd6ed2c08afcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thighBalance: {fileID: 863954263}
+  legBalance: {fileID: 950586093}
+  footBalance: {fileID: 0}
 --- !u!1 &1956676815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5680,7 +5718,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: 50
-  force: 30
+  targetRotationAnimaiton: -90
+  rotationForce: 80
 --- !u!233 &1994478308
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -5704,7 +5743,7 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: -10
-    m_UpperAngle: 5
+    m_UpperAngle: 91
 --- !u!70 &1994478309
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5831,8 +5870,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 0
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
-    m_UpperAngle: 40
+    m_LowerAngle: -2
+    m_UpperAngle: 100
 --- !u!70 &2035949805
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5950,7 +5989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: 0
-  force: 30
+  targetRotationAnimaiton: -91
+  rotationForce: 80
 --- !u!1 &2044874004
 GameObject:
   m_ObjectHideFlags: 0
@@ -5980,7 +6020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f5f75229714a6da5e684a6872b1dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEFAULT_COUNTDOWN_START: 5
+  DEFAULT_COUNTDOWN_START: 0
 --- !u!4 &2044874006
 Transform:
   m_ObjectHideFlags: 0
