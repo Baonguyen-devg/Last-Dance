@@ -15,6 +15,11 @@ namespace DefaultNamespace
 
         private void FixedUpdate()
         {
+            if (GameManager.Instance.IsOnePlayerDead())
+            {
+                hingeControl.SetIsTurnOnMotorAndLimit(false);
+                return;
+            }
             if(!GameManager.Instance.IsGamePlaying()) return;
             Move();   
         }
@@ -44,9 +49,9 @@ namespace DefaultNamespace
             if(isLeftKeyPressed || isRightKeyPressed) hingeControl.SetMotor(0, 0);
         }
 
-        protected abstract bool GetLeftKey();
-        protected abstract bool GetUpKey();
-        protected abstract bool GetRightKey();
+        public abstract bool GetLeftKey();
+        public abstract bool GetUpKey();
+        public abstract bool GetRightKey();
 
         private void ResetValueAndState()
         {

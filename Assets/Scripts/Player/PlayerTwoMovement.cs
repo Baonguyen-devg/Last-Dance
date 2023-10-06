@@ -4,9 +4,9 @@ namespace DefaultNamespace
 {
     public class PlayerTwoMovement : AbstractPlayerMovement
     {
-        protected override bool GetLeftKey() => InputManager.Instance.IsLeftArrowPressed();
-        protected override bool GetUpKey() => InputManager.Instance.IsUpArrowPressed();
-        protected override bool GetRightKey() => InputManager.Instance.IsRightArrowPressed();
+        public override bool GetLeftKey() => InputManager.Instance.IsLeftArrowPressed();
+        public override bool GetUpKey() => InputManager.Instance.IsUpArrowPressed();
+        public override bool GetRightKey() => InputManager.Instance.IsRightArrowPressed();
 
         protected override Vector3 GetForceDirection(float targetRotationEuler) 
             => Quaternion.Euler(0f, 0f, targetRotationEuler) * (Vector2.up + Vector2.left);

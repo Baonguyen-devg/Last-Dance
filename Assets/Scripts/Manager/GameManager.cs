@@ -16,24 +16,20 @@ public class GameManager : Singleton<GameManager>
     {
         CountdownToStart,
         GamePlaying,
+        OnePlayerDead,
         EndGame,
     }
     
-    public enum PlayerWin
-    {
-        PlayerOne,
-        PlayerTwo
-    }
-    
     private State state;
-    private float coundownToStartPlay;
+    private float countdownToStartPlay;
+    private float countdownToReplay = 3;
     private bool isGamePause = false;
 
     protected override void Awake()
     {
         base.Awake();
         state = State.CountdownToStart;
-        this.coundownToStartPlay = DEFAULT_COUNTDOWN_START;
+        this.countdownToStartPlay = DEFAULT_COUNTDOWN_START;
     }
 
     private void Start()
@@ -61,10 +57,10 @@ public class GameManager : Singleton<GameManager>
         switch (state)
         {
             case State.CountdownToStart:
-                coundownToStartPlay -= Time.deltaTime;
-                if (coundownToStartPlay <= 0)
+                countdownToStartPlay -= Time.deltaTime;
+                if (countdownToStartPlay <= 0)
                 {
-                    coundownToStartPlay = DEFAULT_COUNTDOWN_START;
+                    countdownToStartPlay = DEFAULT_COUNTDOWN_START;
                     state = State.GamePlaying;
                 }
                 break;
@@ -72,19 +68,21 @@ public class GameManager : Singleton<GameManager>
             case State.GamePlaying:
                 break;
             
+            case State.OnePlayerDead:
+                countdownToReplay -= Time.deltaTime;
+                if (countdownToReplay <= 0)
+                {
+                    countdownToReplay = 3;
+                    state = State.EndGame;
+                }
+                break;
             
             case State.EndGame:
                 break;
         }
+        Debug.Log(state.ToString());
     }
-
-    public bool IsGamePlaying() => state == State.GamePlaying;
     
-    public bool IsCountDownToStartIsActive() => state == State.CountdownToStart;
-    
-    public bool IsEndGame() => state == State.EndGame;
-
-    public float GetCoundownToStartTimer() => coundownToStartPlay;
 
     public void GameOver()
     {
@@ -94,16 +92,26 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayerOneWin()
     {
-        state = State.CountdownToStart;
+        state = State.OnePlayerDead;
         ScoreManager.Instance.IncreaseScorePlayerOne(1);
         if (ScoreManager.Instance.IsOnePlayerMaxScore()) GameOver();   
     }
     
     public void PlayerTwoWin()
     {
-        state = State.CountdownToStart;
+        state = State.OnePlayerDead;
         ScoreManager.Instance.IncreaseScorePlayerTwo(1);
         if (ScoreManager.Instance.IsOnePlayerMaxScore()) GameOver();
     }
+    
+    public bool IsGamePlaying() => state == State.GamePlaying;
+    
+    public bool IsCountDownToStartIsActive() => state == State.CountdownToStart;
+    
+    public bool IsOnePlayerDead() => state == State.OnePlayerDead;
+
+    public bool IsEndGame() => state == State.EndGame;
+    
+    public float GetCoundownToStartTimer() => countdownToStartPlay;
 }
 

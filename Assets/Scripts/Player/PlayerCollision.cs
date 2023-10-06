@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
@@ -11,7 +9,8 @@ namespace DefaultNamespace
         private HingeJoint2D hingeJoint2D;
         private Rigidbody2D rigidbody2D;
         private CircleCollider2D circleCollider2D;
-
+        [SerializeField] private float reflectForce = 10f;
+        
         private void Start()
         {
             hingeJoint2D = GetComponent<HingeJoint2D>();
@@ -22,22 +21,30 @@ namespace DefaultNamespace
 
         private void OnCollisionEnter2D(Collision2D collision2D)
         {
-            if (collision2D.gameObject.GetComponent<IDeadCollision>() != null)
+            if (collision2D.gameObject.GetComponent<IDeadCollision>() != null && !GameManager.Instance.IsOnePlayerDead())
             {
-                hingeJoint2D.enabled = false;
-                this.circleCollider2D.enabled = false;
-                BounceHead();
+                DisableComponent();
+                BounceHead(collision2D);
                 if(gameObject.name == PLAYER_ONE_HEAD) GameManager.Instance.PlayerTwoWin();
                 else GameManager.Instance.PlayerOneWin();
             }
         }
 
-        private void BounceHead()
+        private void DisableComponent()
         {
-            float xDir = Random.Range(-1f, 1f);
-            if (xDir == 0) xDir = 0.5f;
-            Vector2 direction = new Vector2(xDir, 1);
-            rigidbody2D.AddForce(direction.normalized * 50);
+            hingeJoint2D.enabled = false;
+            this.circleCollider2D.enabled = false;
+        }
+
+        private void BounceHead(Collision2D collision2D)
+        {
+             rigidbody2D.gravityScale = 0f;
+             Vector2 contactPoint = collision2D.GetContact(0).point;
+             
+             Vector2 reflectVectorNormalize = Vector2.Reflect(rigidbody2D.velocity, contactPoint.normalized).normalized;
+             if (reflectVectorNormalize.y < 0) reflectVectorNormalize.y = -reflectVectorNormalize.y;
+             
+             rigidbody2D.velocity = reflectVectorNormalize * reflectForce;
         }
     }
 }
