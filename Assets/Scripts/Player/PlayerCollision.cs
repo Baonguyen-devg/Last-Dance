@@ -25,6 +25,8 @@ namespace DefaultNamespace
             {
                 DisableComponent();
                 BounceHead(collision2D);
+                
+                // Thay doi cho hop logic
                 if(gameObject.name == PLAYER_ONE_HEAD) GameManager.Instance.PlayerTwoWin();
                 else GameManager.Instance.PlayerOneWin();
             }

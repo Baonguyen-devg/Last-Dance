@@ -22,5 +22,11 @@ namespace DefaultNamespace
                 return headPlayerTwo;
             return null;
         }
+        
+        protected override void RemoveDuplicates()
+        {
+            if(instance != null) { Destroy(gameObject); return; }
+            instance = this;
+        }
     }
 }

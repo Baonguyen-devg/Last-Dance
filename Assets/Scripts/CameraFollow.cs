@@ -20,7 +20,7 @@ namespace DefaultNamespace
         private void LateUpdate()
         {
             Vector3 targetPosition = targetTransform.position;
-            targetPosition.y = Mathf.Clamp(targetPosition.y, 0, 1);
+            targetPosition.y = 0;
             targetPosition.z = transform.position.z;
             
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * GetSmoothTime());

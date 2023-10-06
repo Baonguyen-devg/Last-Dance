@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     
     private State state;
     private float countdownToStartPlay;
-    private float countdownToReplay = 3;
+    private float countdownToReplay = 3; // Thay doi lai 
     private bool isGamePause = false;
 
     protected override void Awake()
@@ -60,6 +60,7 @@ public class GameManager : Singleton<GameManager>
                 countdownToStartPlay -= Time.deltaTime;
                 if (countdownToStartPlay <= 0)
                 {
+                    // DEFAULT_COUNTDOWN_START thay doi lai
                     countdownToStartPlay = DEFAULT_COUNTDOWN_START;
                     state = State.GamePlaying;
                 }
