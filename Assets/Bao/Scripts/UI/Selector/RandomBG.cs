@@ -10,6 +10,9 @@ public class RandomBG : BaseLoadBackgroundData
     [ContextMenu("Random Background")]
     private void RandomBackgound()
     {
+        //Divid into a class about SetUpUI BattleVS
+        PlayerPrefs.SetString("TurnOnBattleVS", "On");
+
         string nameBackground = this.backgroundDatabaseSO.GetRandomBackground();
         Debug.Log("Background random's name is: " + nameBackground, gameObject);
         PlayerPrefs.SetString(nameSetDataBackground, nameBackground);

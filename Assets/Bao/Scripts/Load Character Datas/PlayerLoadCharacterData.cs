@@ -31,6 +31,7 @@ public class PlayerLoadCharacterData : BaseLoadCharacterData
     ) {
         string nameCharacter = PlayerPrefs.GetString(nameKey);
         Character character = this.characterDatabaseSO.GetCharacterByName(nameCharacter);
+        spritePlayer.transform.localScale = character.RateScale;
         this.SetData(spritePlayer, character);
     }
 

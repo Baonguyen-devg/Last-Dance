@@ -1,4 +1,7 @@
 using UnityEngine;
+using Unity.Collections;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
@@ -25,11 +28,18 @@ namespace DefaultNamespace
             {
                 DisableComponent();
                 BounceHead(collision2D);
-                
-                // Thay doi cho hop logic
+                StartCoroutine(this.ReloadScene());
                 if(gameObject.name == PLAYER_ONE_HEAD) GameManager.Instance.PlayerTwoWin();
                 else GameManager.Instance.PlayerOneWin();
             }
+        }
+
+        private IEnumerator ReloadScene()
+        {
+            yield return new WaitForSeconds(1.5f);
+            int numberScene = SceneManager.GetActiveScene().buildIndex;
+            GameManager.Instance.PlayeAgain();
+            SceneManager.LoadScene(numberScene);
         }
 
         private void DisableComponent()
