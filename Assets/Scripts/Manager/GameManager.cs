@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     //Bao
-    public float DEFAULT_COUNTDOWN_START = 5f;
+    public float DEFAULT_COUNTDOWN_START = 3f;
 
     public event EventHandler OnGameOver;
     public event EventHandler OnGamePaused;
@@ -21,19 +21,19 @@ public class GameManager : Singleton<GameManager>
     }
     
     private State state;
-    private float countdownToStartPlay;
-    private float countdownToReplay = 3; // Thay doi lai 
+    [SerializeField] private float countdownToStartPlay;
+    private float countdownToReplay; // Thay doi lai 
     private bool isGamePause = false;
 
     protected override void Awake()
     {
         base.Awake();
         state = State.CountdownToStart;
-        this.countdownToStartPlay = DEFAULT_COUNTDOWN_START;
     }
 
     private void Start()
     {
+        this.countdownToStartPlay = DEFAULT_COUNTDOWN_START + UIController.Instance.TimeAppearMainPanel;
         InputManager.Instance.OnPauseAction += InputManager_OnPauseAction;
     }
 
@@ -114,5 +114,7 @@ public class GameManager : Singleton<GameManager>
     public bool IsEndGame() => state == State.EndGame;
     
     public float GetCoundownToStartTimer() => countdownToStartPlay;
+
+    public void PlayeAgain() => state = State.CountdownToStart; 
 }
 

@@ -25,8 +25,7 @@ public class VSPanelLoadCharacterData : BaseLoadCharacterData
     private void LoadData(
         Transform battleVSPlayer,
         string nameKey
-    )
-    {
+    ) {
         string nameCharacter = PlayerPrefs.GetString(nameKey);
         Character character = this.characterDatabaseSO.GetCharacterByName(nameCharacter);
         this.SetData(battleVSPlayer, character);
@@ -35,8 +34,7 @@ public class VSPanelLoadCharacterData : BaseLoadCharacterData
     private void SetData(
         Transform battleVsPlayer,
         Character character
-    )
-    {
+    ) {
         battleVsPlayer.Find("Model").GetComponent<Image>().sprite = character.Sprite;
         battleVsPlayer.Find("Name").GetComponent<Text>().text = character.NameCharacter;
     }

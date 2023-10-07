@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public partial class UIController : AutoMonoBehaviour
 {
+    private const float DEFAULT_TIME_APPEAR_MAIN = 1f;
+    private static UIController instance;
+    public static UIController Instance => instance;
+
     [Header("[ Panels ]"), Space(6)]
     [SerializeField] private GameObject gameLosePanel;
     [SerializeField] private GameObject pauseGamePanel;
@@ -13,7 +17,7 @@ public partial class UIController : AutoMonoBehaviour
     [SerializeField] private GameObject vsBattlePanel;
 
     [SerializeField] private Animator vsBattlePanelAnimator;
-    [SerializeField] private float timeAppearMainPanel = 1f;
+    [SerializeField] private float timeAppearMainPanel = DEFAULT_TIME_APPEAR_MAIN;
     [SerializeField] private float timeDisApearVSBattlePanel = 2f;
 
     public float TimeAppearMainPanel => this.timeAppearMainPanel;
@@ -28,18 +32,28 @@ public partial class UIController : AutoMonoBehaviour
         this.vsBattlePanelAnimator = this.vsBattlePanel.GetComponent<Animator>();
     }
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        UIController.instance = this;
+        if (PlayerPrefs.GetString("TurnOnBattleVS").Equals("Off"))
+        {
+            this.timeAppearMainPanel = 0;
+            StartCoroutine(this.ActiveMainGamePanel(0));
+            return;
+        }
+
+        StartCoroutine(this.ActiveMainGamePanel(this.timeAppearMainPanel));
+        PlayerPrefs.SetString("TurnOnBattleVS", "Off");
+
         this.vsBattlePanel.SetActive(true);
         this.vsBattlePanelAnimator.SetTrigger("Open");
-
-        StartCoroutine(this.ActiveMainGamePanel());
         StartCoroutine(this.DisActiveVSBattlePanel());
     }
 
-    private IEnumerator ActiveMainGamePanel()
+    private IEnumerator ActiveMainGamePanel(float timeWaiting)
     {
-        yield return new WaitForSeconds(this.timeAppearMainPanel);
+        yield return new WaitForSeconds(timeWaiting);
         this.mainGamePanel.gameObject.SetActive(true);
     }
     

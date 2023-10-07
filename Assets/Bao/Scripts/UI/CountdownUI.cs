@@ -23,12 +23,13 @@ public class CountdownUI : AutoMonoBehaviour
 
         this.uiController = GameObject.Find("Canvas").GetComponent<UIController>();
         this.gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        this.LoadRateCountDown();
     }
+
+    private void Start() => this.LoadRateCountDown();
 
     private void LoadRateCountDown()
     {
-        float time = this.gameManager.DEFAULT_COUNTDOWN_START - this.uiController.TimeAppearMainPanel;
+        float time = this.gameManager.DEFAULT_COUNTDOWN_START;
         this.rateCountDown = (float) time / this.prefabs.Count;
     }
 
