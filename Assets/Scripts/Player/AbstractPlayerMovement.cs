@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -10,17 +11,27 @@ namespace DefaultNamespace
         [SerializeField] protected Transform headTransform;
         [SerializeField] protected Rigidbody2D thighBody2D;
         [SerializeField] protected float outSideVelocityRate = 2;
-        
+
+        protected PlayerController playerController;
+        protected bool canMove;
+
+        private void Awake() => playerController = GetComponent<PlayerController>();
+
         private void Start() => hingeControl.SetIsTurnOnMotorAndLimit(true);
 
         private void FixedUpdate()
         {
+            canMove = false;
+            
             if (GameManager.Instance.IsOnePlayerDead())
             {
                 hingeControl.SetIsTurnOnMotorAndLimit(false);
                 return;
             }
+            
             if(!GameManager.Instance.IsGamePlaying()) return;
+            if(playerController.GetPlayerStamina().IsPassive()) return;
+            
             Move();   
         }
         
@@ -30,7 +41,8 @@ namespace DefaultNamespace
             bool isUpKeyPressed = GetUpKey();
             bool isRightKeyPressed = GetRightKey();
             bool isPress = isLeftKeyPressed || isUpKeyPressed || isRightKeyPressed;
-                
+            canMove = isPress;
+            
             if (!isPress) { ResetValueAndState(); return;}
 
             hingeControl.SetIsTurnOnMotorAndLimit(true);
@@ -67,5 +79,7 @@ namespace DefaultNamespace
         protected abstract void MoveToLeft(Vector2 forceDirection);
         protected abstract void MoveUp(float targetRotationEuler);
         protected abstract void MoveToRight(Vector2 forceDirection);
+
+        public bool CanMove() => canMove;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -7,13 +8,15 @@ namespace DefaultNamespace
         //Dat
         [SerializeField] private float slowMotionFactor = 0.05f;
 
-        private bool isSlowMotion = false;
-        
+        private bool isSlowMotion;
+
+        private void Awake() => isSlowMotion = false;
+
         private void LateUpdate()
         {
             if (!GameManager.Instance.IsGamePlaying())
             {
-                Time.timeScale = 1;
+                SetDefaultTimes();
                 isSlowMotion = true;
                 return;
             }
@@ -26,9 +29,15 @@ namespace DefaultNamespace
 
             if (!IsWarning())
             {
-                Time.timeScale = 1;
+                SetDefaultTimes();
                 isSlowMotion = false;
             }
+        }
+
+        private static void SetDefaultTimes()
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f;
         }
 
         private bool IsWarning()
