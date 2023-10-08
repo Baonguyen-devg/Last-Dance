@@ -10,7 +10,7 @@ namespace DefaultNamespace
         private const string PLAYER_ONE_HEAD = "Player_1_Head";
         private const string PLAYER_TWO_HEAD = "Player_2_Head";
         private HingeJoint2D hingeJoint2D;
-        private Rigidbody2D rigidbody2D;
+        private new Rigidbody2D rigidbody2D;
         private CircleCollider2D circleCollider2D;
         [SerializeField] private float reflectForce = 10f;
         
