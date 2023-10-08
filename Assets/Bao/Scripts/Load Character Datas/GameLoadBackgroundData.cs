@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class GameLoadBackgroundData : BaseLoadBackgroundData
 {
-    private void Start() => this.LoadData(PlayerPrefs.GetString("Background"));
+    protected override void Start()
+    {
+        base.Start();
+        this.LoadData(PlayerPrefs.GetString("Background"));
+    }
 
     private void LoadData(
         string nameKey

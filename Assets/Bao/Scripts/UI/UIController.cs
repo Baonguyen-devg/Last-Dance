@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public partial class UIController : AutoMonoBehaviour
 {
@@ -11,7 +10,7 @@ public partial class UIController : AutoMonoBehaviour
     public static UIController Instance => instance;
 
     [Header("[ Panels ]"), Space(6)]
-    [SerializeField] private GameObject gameLosePanel;
+    [SerializeField] private GameObject endGamePanel;
     [SerializeField] private GameObject pauseGamePanel;
     [SerializeField] private GameObject mainGamePanel;
     [SerializeField] private GameObject vsBattlePanel;
@@ -25,7 +24,7 @@ public partial class UIController : AutoMonoBehaviour
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
-        this.gameLosePanel = transform.Find("End Game Panel").gameObject;
+        this.endGamePanel = transform.Find("End Game Panel").gameObject;
         this.pauseGamePanel = transform.Find("Pause Game Panel").gameObject;
         this.mainGamePanel = transform.Find("Main Game Panel").gameObject;
         this.vsBattlePanel = transform.Find("Battle VS Panel").gameObject;
@@ -48,8 +47,11 @@ public partial class UIController : AutoMonoBehaviour
 
         this.vsBattlePanel.SetActive(true);
         this.vsBattlePanelAnimator.SetTrigger("Open");
+
         StartCoroutine(this.DisActiveVSBattlePanel());
     }
+
+    private void Start() => GameManager.Instance.OnGameOver += this.OnEndGame;
 
     private IEnumerator ActiveMainGamePanel(float timeWaiting)
     {
@@ -72,7 +74,10 @@ public partial class UIController : AutoMonoBehaviour
         }
     }
 
-    public virtual void OnGameLosePanel() => this.gameLosePanel.SetActive(true);
+    private void OnEndGame(System.Object sender, System.EventArgs e) =>
+        this.endGamePanel.SetActive(true);
+
+    public virtual void OnGameLosePanel() => this.endGamePanel.SetActive(true);
 
     public virtual void OnPauseGamePanel() => this.pauseGamePanel.SetActive(true);
 

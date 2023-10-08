@@ -16,8 +16,9 @@ public class VSPanelLoadCharacterData : BaseLoadCharacterData
         this.battleVSPlayer_2 = transform.Find("Side Right").Find("Player");
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         this.LoadData(this.battleVSPlayer_1, "Player_One");
         this.LoadData(this.battleVSPlayer_2, "Player_Two");
     }

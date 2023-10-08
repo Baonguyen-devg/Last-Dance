@@ -4,7 +4,12 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "BackgroundDatabase", menuName = "ScriptableObjects/BackgroundDatabase")]
 public class BackgroundDatabaseSO : ScriptableObject
-{   
+{
+#if UNITY_EDITOR
+    [TextArea(2, 10), Space(6)]
+    [SerializeField] protected string DeveloperDescription = "";
+#endif
+
     [Header("[ Background list ]"), Space(6)]
     [SerializeField] private Background[] backgrounds;
     public Background[] Backgrounds => this.backgrounds;

@@ -2,11 +2,12 @@ using System;
 using DefaultNamespace;
 using RepeatUtil.DesignPattern.SingletonPattern;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     //Bao
-    public float DEFAULT_COUNTDOWN_START = 3f;
+    public float DEFAULT_COUNTDOWN_START = 2f;
 
     public event EventHandler OnGameOver;
     public event EventHandler OnGamePaused;
@@ -95,14 +96,12 @@ public class GameManager : Singleton<GameManager>
     {
         state = State.OnePlayerDead;
         ScoreManager.Instance.IncreaseScorePlayerOne(1);
-        if (ScoreManager.Instance.IsOnePlayerMaxScore()) GameOver();   
     }
     
     public void PlayerTwoWin()
     {
         state = State.OnePlayerDead;
         ScoreManager.Instance.IncreaseScorePlayerTwo(1);
-        if (ScoreManager.Instance.IsOnePlayerMaxScore()) GameOver();
     }
     
     public bool IsGamePlaying() => state == State.GamePlaying;
@@ -115,6 +114,17 @@ public class GameManager : Singleton<GameManager>
     
     public float GetCoundownToStartTimer() => countdownToStartPlay;
 
-    public void PlayeAgain() => state = State.CountdownToStart; 
+    public void EndGame()
+    {
+        if (ScoreManager.Instance.IsOnePlayerMaxScore()) this.GameOver();
+        else this.PlayeAgain();
+    }
+
+    public void PlayeAgain()
+    {
+        state = State.CountdownToStart;
+        int numberScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(numberScene);
+    }
 }
 

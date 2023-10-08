@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLoadCharacterData : BaseLoadCharacterData
 {
-    [Header("[ Player 1 and Player 2 sprite ]"), Space(6)]
+    [Space(12), Header("[ Player 1 and Player 2 sprite ]"), Space(6)]
     [SerializeField] private SpriteRenderer spritePlayer_1;
     [SerializeField] private SpriteRenderer spritePlayer_2;
 

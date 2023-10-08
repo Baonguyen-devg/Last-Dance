@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19feaec55b875a4fab33f7a42723e3d, type: 3}
   m_Name: BackgroundDatabase
   m_EditorClassIdentifier: 
+  DeveloperDescription: Storage data of backgrounds
   backgrounds:
   - nameBackground: Background 1
     backgroundObject: {fileID: 8251398347929326587, guid: 349c9aec413b7fc489ed74a1bc49521f, type: 3}
