@@ -1,14 +1,14 @@
 using UnityEngine;
 using Unity.Collections;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
     public class PlayerCollision : MonoBehaviour
     {
-        private const string PLAYER_ONE_HEAD = "Player_1_Head";
-        private const string PLAYER_TWO_HEAD = "Player_2_Head";
+        private const string PLAYER_ONE_HEAD = "Player_One_Head";
+        private const string PLAYER_TWO_HEAD = "Player_Two_Head";
+
         private HingeJoint2D hingeJoint2D;
         private new Rigidbody2D rigidbody2D;
         private CircleCollider2D circleCollider2D;
@@ -21,25 +21,22 @@ namespace DefaultNamespace
             circleCollider2D = GetComponent<CircleCollider2D>();
         }
 
-
         private void OnCollisionEnter2D(Collision2D collision2D)
         {
             if (collision2D.gameObject.GetComponent<IDeadCollision>() != null && !GameManager.Instance.IsOnePlayerDead())
             {
                 DisableComponent();
                 BounceHead(collision2D);
-                StartCoroutine(this.ReloadScene());
-                if(gameObject.name == PLAYER_ONE_HEAD) GameManager.Instance.PlayerTwoWin();
+                if (gameObject.name.Equals(PLAYER_ONE_HEAD)) GameManager.Instance.PlayerTwoWin();
                 else GameManager.Instance.PlayerOneWin();
+                StartCoroutine(this.ReloadScene());
             }
         }
 
         private IEnumerator ReloadScene()
         {
             yield return new WaitForSeconds(1.5f);
-            int numberScene = SceneManager.GetActiveScene().buildIndex;
-            GameManager.Instance.PlayeAgain();
-            SceneManager.LoadScene(numberScene);
+            GameManager.Instance.EndGame();
         }
 
         private void DisableComponent()

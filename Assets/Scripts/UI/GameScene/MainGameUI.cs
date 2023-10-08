@@ -12,7 +12,9 @@ namespace DefaultNamespace.UI.GameScene
         {
             ScoreManager.Instance.OnScorePlayerOneChanged += ScoreManager_OnScorePlayerOneChanged;
             ScoreManager.Instance.OneScorePlayerTwoChanged += ScoreManager_OnScorePlayerTwoChanged;
-            playerOneScoreText.text = playerOneScoreTwo.text = 0.ToString();
+
+            playerOneScoreText.text = ScoreManager.Instance.ScorePlayerOne.ToString();
+            playerOneScoreTwo.text = ScoreManager.Instance.ScorePlayerTwo.ToString();
         }
 
         private void ScoreManager_OnScorePlayerOneChanged(int i) => playerOneScoreText.text = i.ToString();
