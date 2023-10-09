@@ -11,18 +11,12 @@ namespace DefaultNamespace.UI.GameScene
         [ContextMenu("Load Component")]
         protected override void LoadComponent() =>
             this.playerWinText = transform.GetComponentInChildren<TextMeshProUGUI>();
-        
-        private void Start()
-        {
-            playerWinText.gameObject.SetActive(false);
-            GameManager.Instance.OnGameOver += GameManager_OnGameOver;
-        }
 
-        private void GameManager_OnGameOver(object sender, EventArgs e)
+        private void OnEnable() => this.OnGameOver();
+
+        private void OnGameOver()
         {
-            playerWinText.gameObject.SetActive(true);
             string winner = ScoreManager.Instance.IsPlayerOneMaxScore() ? "PLAYER ONE" : "PLAYER TWO";
-            Debug.Log(ScoreManager.Instance.IsPlayerOneMaxScore() + " HERE");
             playerWinText.text = winner + " WIN";
         }
     }

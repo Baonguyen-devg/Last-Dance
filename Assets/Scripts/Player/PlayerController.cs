@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class PlayerController : MonoBehaviour {
+    public class PlayerController : MonoBehaviour 
+    {
         [SerializeField] private AbstractPlayerMovement abstractPlayerMovement;
         [SerializeField] private PlayerStamina playerStamina;
         [SerializeField] private PlayerAnimation playerAnimation;

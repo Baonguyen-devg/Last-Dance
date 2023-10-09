@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
-public partial class UIController : AutoMonoBehaviour
+public partial class UIManager : AutoMonoBehaviour
 {
     private const float DEFAULT_TIME_APPEAR_MAIN = 1f;
-    private static UIController instance;
-    public static UIController Instance => instance;
+    private static UIManager instance;
+    public static UIManager Instance => instance;
 
     [Header("[ Panels ]"), Space(6)]
     [SerializeField] private GameObject endGamePanel;
@@ -34,7 +35,7 @@ public partial class UIController : AutoMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        UIController.instance = this;
+        UIManager.instance = this;
         if (PlayerPrefs.GetString("TurnOnBattleVS").Equals("Off"))
         {
             this.timeAppearMainPanel = 0;
@@ -51,7 +52,19 @@ public partial class UIController : AutoMonoBehaviour
         StartCoroutine(this.DisActiveVSBattlePanel());
     }
 
-    private void Start() => GameManager.Instance.OnGameOver += this.OnEndGame;
+    private void Start()
+    {
+        GameManager.Instance.OnGamePaused += this.OnPauseGamePanel;
+        GameManager.Instance.OnGameUnpaused += this.OffPauseGamePanel;
+        GameManager.Instance.OnGameOver += this.OnGameLosePanel;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGamePaused -= this.OnPauseGamePanel;
+        GameManager.Instance.OnGameUnpaused -= this.OffPauseGamePanel;
+        GameManager.Instance.OnGameOver -= this.OnGameLosePanel;
+    }
 
     private IEnumerator ActiveMainGamePanel(float timeWaiting)
     {
@@ -65,33 +78,31 @@ public partial class UIController : AutoMonoBehaviour
         this.vsBattlePanel.SetActive(false);
     }
 
-    private void Update()
+    public virtual void OnGameLosePanel(object sender, EventArgs e)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Time.timeScale = 0;
-            this.OnPauseGamePanel();
-        }
+        if (this.endGamePanel == null) Debug.Log("HERE");
+        else this.endGamePanel.SetActive(true);
     }
 
-    private void OnEndGame(System.Object sender, System.EventArgs e) =>
-        this.endGamePanel.SetActive(true);
+    public virtual void OnPauseGamePanel(object sender, EventArgs e) => 
+        this.pauseGamePanel.SetActive(true);
 
-    public virtual void OnGameLosePanel() => this.endGamePanel.SetActive(true);
-
-    public virtual void OnPauseGamePanel() => this.pauseGamePanel.SetActive(true);
+    public virtual void OffPauseGamePanel(object sender, EventArgs e) =>
+        this.pauseGamePanel.SetActive(false);
 
     public virtual void ContinueGame() => Time.timeScale = 1;
 
     public virtual void BackMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex - 2;
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     public virtual void PlayAgain()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
