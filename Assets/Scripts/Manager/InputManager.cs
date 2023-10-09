@@ -23,6 +23,9 @@ namespace DefaultNamespace
             isLeftArrowPressed = Input.GetKey(KeyCode.LeftArrow);
             isUpArrowPressed = Input.GetKey(KeyCode.UpArrow);
             isRightArrowPressed = Input.GetKey(KeyCode.RightArrow);
+      
+            if (Input.GetKeyDown(KeyCode.Escape)) 
+                this.OnPauseAction?.Invoke(null, EventArgs.Empty);
         }
 
         public bool IsAPressed() => isAPressed;

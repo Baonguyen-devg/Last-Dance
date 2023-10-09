@@ -8,7 +8,7 @@ public class CountdownUI : AutoMonoBehaviour
     [Header("[ Component ]"), Space(6)]
     [SerializeField] private List<Transform> prefabs;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private UIController uiController;
+    [SerializeField] private UIManager uiController;
 
     [SerializeField] private int count = 0;
     [SerializeField] private float rateCountDown = 0;
@@ -21,7 +21,7 @@ public class CountdownUI : AutoMonoBehaviour
         if (this.prefabs.Count != 0) this.prefabs.Clear();
         prefabs.AddRange(transform.Cast<Transform>());
 
-        this.uiController = GameObject.Find("Canvas").GetComponent<UIController>();
+        this.uiController = GameObject.Find("Canvas").GetComponent<UIManager>();
         this.gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 

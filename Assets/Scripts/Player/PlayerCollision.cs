@@ -23,20 +23,13 @@ namespace DefaultNamespace
 
         private void OnCollisionEnter2D(Collision2D collision2D)
         {
-            if (collision2D.gameObject.GetComponent<IDeadCollision>() != null && !GameManager.Instance.IsOnePlayerDead())
+            if (!GameManager.Instance.IsOnePlayerDead() && collision2D.gameObject.GetComponent<IDeadCollision>() != null)
             {
                 DisableComponent();
                 BounceHead(collision2D);
                 if (gameObject.name.Equals(PLAYER_ONE_HEAD)) GameManager.Instance.PlayerTwoWin();
                 else GameManager.Instance.PlayerOneWin();
-                StartCoroutine(this.ReloadScene());
             }
-        }
-
-        private IEnumerator ReloadScene()
-        {
-            yield return new WaitForSeconds(1.5f);
-            GameManager.Instance.EndGame();
         }
 
         private void DisableComponent()

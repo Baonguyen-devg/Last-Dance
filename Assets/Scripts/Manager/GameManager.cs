@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     //Bao
-    public float DEFAULT_COUNTDOWN_START = 2f;
+    [HideInInspector] public float DEFAULT_COUNTDOWN_START = 1f;
+    private const float DEFAULT_COUNTDOWN_TO_RELAY = 1f;
 
     public event EventHandler OnGameOver;
     public event EventHandler OnGamePaused;
@@ -23,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     
     private State state;
     [SerializeField] private float countdownToStartPlay;
-    private float countdownToReplay; // Thay doi lai 
+    private float countdownToReplay = DEFAULT_COUNTDOWN_TO_RELAY; // Thay doi lai 
     private bool isGamePause = false;
 
     protected override void Awake()
@@ -34,7 +35,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        this.countdownToStartPlay = DEFAULT_COUNTDOWN_START + UIController.Instance.TimeAppearMainPanel;
+        this.countdownToStartPlay = DEFAULT_COUNTDOWN_START + UIManager.Instance.TimeAppearMainPanel;
         InputManager.Instance.OnPauseAction += InputManager_OnPauseAction;
     }
 
@@ -74,8 +75,9 @@ public class GameManager : Singleton<GameManager>
                 countdownToReplay -= Time.deltaTime;
                 if (countdownToReplay <= 0)
                 {
-                    countdownToReplay = 3;
+                    countdownToReplay = DEFAULT_COUNTDOWN_TO_RELAY;
                     state = State.EndGame;
+                    EndGame();
                 }
                 break;
             
@@ -88,8 +90,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        state = State.EndGame;
-        OnGameOver?.Invoke(this, EventArgs.Empty);
+        OnGameOver?.Invoke(null, EventArgs.Empty);
     }
 
     public void PlayerOneWin()
@@ -114,13 +115,15 @@ public class GameManager : Singleton<GameManager>
     
     public float GetCoundownToStartTimer() => countdownToStartPlay;
 
+    public float GetCountDownToRelay() => countdownToReplay;
+
     public void EndGame()
     {
         if (ScoreManager.Instance.IsOnePlayerMaxScore()) this.GameOver();
-        else this.PlayeAgain();
+        else this.PlayAgain();
     }
 
-    public void PlayeAgain()
+    public void PlayAgain()
     {
         state = State.CountdownToStart;
         int numberScene = SceneManager.GetActiveScene().buildIndex;
