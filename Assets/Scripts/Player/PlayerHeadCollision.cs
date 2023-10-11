@@ -1,10 +1,8 @@
 using UnityEngine;
-using Unity.Collections;
-using System.Collections;
 
 namespace DefaultNamespace
 {
-    public class PlayerCollision : MonoBehaviour
+    public class PlayerHeadCollision : MonoBehaviour
     {
         private const string PLAYER_ONE_HEAD = "Player_One_Head";
         private const string PLAYER_TWO_HEAD = "Player_Two_Head";

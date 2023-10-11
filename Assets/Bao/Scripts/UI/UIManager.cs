@@ -54,6 +54,7 @@ public partial class UIManager : AutoMonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.OnGamePaused += this.OnPauseGamePanel;
         GameManager.Instance.OnGameUnpaused += this.OffPauseGamePanel;
         GameManager.Instance.OnGameOver += this.OnGameLosePanel;
@@ -61,10 +62,12 @@ public partial class UIManager : AutoMonoBehaviour
 
     private void OnDestroy()
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.OnGamePaused -= this.OnPauseGamePanel;
         GameManager.Instance.OnGameUnpaused -= this.OffPauseGamePanel;
         GameManager.Instance.OnGameOver -= this.OnGameLosePanel;
     }
+
 
     private IEnumerator ActiveMainGamePanel(float timeWaiting)
     {
