@@ -2,23 +2,20 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class PlayerController : MonoBehaviour 
+    public class PlayerController : RepeatMonoBehaviour 
     {
         [SerializeField] private AbstractPlayerMovement abstractPlayerMovement;
         [SerializeField] private PlayerStamina playerStamina;
-        [SerializeField] private PlayerAnimation playerAnimation;
 
-        private void Awake()
+        protected override void LoadComponents()
         {
+            base.LoadComponents();
             abstractPlayerMovement = GetComponent<AbstractPlayerMovement>();
             playerStamina = GetComponent<PlayerStamina>();
-            playerAnimation = GetComponent<PlayerAnimation>();
         }
 
         public AbstractPlayerMovement GetAbstractPlayerMovement() => abstractPlayerMovement; 
         
         public PlayerStamina GetPlayerStamina() => playerStamina; 
-
-        public PlayerAnimation GetPlayerAnimation() => playerAnimation; 
     }
 }

@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
@@ -40,6 +40,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 511650885
+    locked: 0
+  - name: Player
+    uniqueID: 1665682765
     locked: 0
   - name: UI
     uniqueID: 1453075293
