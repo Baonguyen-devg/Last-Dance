@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     //Bao
-    [HideInInspector] public float DEFAULT_COUNTDOWN_START = 1f;
-    private const float DEFAULT_COUNTDOWN_TO_RELAY = 1f;
+    [HideInInspector] public float DEFAULT_COUNTDOWN_START = 1.5f;
+    private const float DEFAULT_COUNTDOWN_TO_RELAY = 2f;
 
     public event EventHandler OnGameOver;
     public event EventHandler OnGamePaused;
@@ -116,6 +116,13 @@ public class GameManager : Singleton<GameManager>
     public float GetCoundownToStartTimer() => countdownToStartPlay;
 
     public float GetCountDownToRelay() => countdownToReplay;
+
+    //Bao
+    public void SetStateCountDownToStart()
+    {
+        state = State.CountdownToStart;
+        this.countdownToStartPlay = DEFAULT_COUNTDOWN_START;
+    }
 
     public void EndGame()
     {
