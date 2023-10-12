@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using DefaultNamespace.UI.GameScene;
 
 public partial class UIManager : AutoMonoBehaviour
 {
@@ -16,11 +17,13 @@ public partial class UIManager : AutoMonoBehaviour
     [SerializeField] private GameObject mainGamePanel;
     [SerializeField] private GameObject vsBattlePanel;
 
+    [SerializeField] private MainGameUI mainGameUI;
     [SerializeField] private Animator vsBattlePanelAnimator;
     [SerializeField] private float timeAppearMainPanel = DEFAULT_TIME_APPEAR_MAIN;
     [SerializeField] private float timeDisApearVSBattlePanel = 2f;
 
     public float TimeAppearMainPanel => this.timeAppearMainPanel;
+    public MainGameUI MainGameUI => this.mainGameUI;
 
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
@@ -29,7 +32,9 @@ public partial class UIManager : AutoMonoBehaviour
         this.pauseGamePanel = transform.Find("Pause Game Panel").gameObject;
         this.mainGamePanel = transform.Find("Main Game Panel").gameObject;
         this.vsBattlePanel = transform.Find("Battle VS Panel").gameObject;
+
         this.vsBattlePanelAnimator = this.vsBattlePanel.GetComponent<Animator>();
+        this.mainGameUI = GetComponentInChildren<MainGameUI>();
     }
 
     protected override void Awake()
@@ -58,6 +63,8 @@ public partial class UIManager : AutoMonoBehaviour
         GameManager.Instance.OnGamePaused += this.OnPauseGamePanel;
         GameManager.Instance.OnGameUnpaused += this.OffPauseGamePanel;
         GameManager.Instance.OnGameOver += this.OnGameLosePanel;
+
+        GameManager.Instance?.SetStateCountDownToStart(); //de tam thoi o day
     }
 
     private void OnDestroy()
@@ -67,7 +74,6 @@ public partial class UIManager : AutoMonoBehaviour
         GameManager.Instance.OnGameUnpaused -= this.OffPauseGamePanel;
         GameManager.Instance.OnGameOver -= this.OnGameLosePanel;
     }
-
 
     private IEnumerator ActiveMainGamePanel(float timeWaiting)
     {

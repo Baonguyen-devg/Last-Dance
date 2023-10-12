@@ -10,15 +10,14 @@ namespace DefaultNamespace
         
         private int scorePlayerOne;
         private int scorePlayerTwo;
-        private const int MAX_SCORE = 10;
+        private const int MAX_SCORE = 3;
 
         public int ScorePlayerOne => this.scorePlayerOne;
         public int ScorePlayerTwo => this.scorePlayerTwo;
 
-        private void Start()
-        {
-            scorePlayerOne = scorePlayerTwo = 0;
-        }
+        private void Start() => this.SetDefaultScores();
+
+        public void SetDefaultScores() => scorePlayerOne = scorePlayerTwo = 0;
 
         public void IncreaseScorePlayerOne(int score)
         {

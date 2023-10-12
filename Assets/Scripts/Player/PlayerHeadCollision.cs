@@ -25,8 +25,16 @@ namespace DefaultNamespace
             {
                 DisableComponent();
                 BounceHead(collision2D);
-                if (gameObject.name.Equals(PLAYER_ONE_HEAD)) GameManager.Instance.PlayerTwoWin();
-                else GameManager.Instance.PlayerOneWin();
+                if (gameObject.name.Equals(PLAYER_ONE_HEAD))
+                {
+                    GameManager.Instance.PlayerTwoWin();
+                    UIManager.Instance.MainGameUI.AppearResultPlayers(isPlayerOneWin: false);
+                }
+                else
+                {
+                    GameManager.Instance.PlayerOneWin();
+                    UIManager.Instance.MainGameUI.AppearResultPlayers(isPlayerOneWin: true);
+                }
             }
         }
 

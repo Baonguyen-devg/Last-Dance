@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
+using DefaultNamespace;
 
 public class FightButton : BaseButton
 {
@@ -21,6 +22,8 @@ public class FightButton : BaseButton
         base.OnClick();
         this.battleVSPanel.gameObject.SetActive(true);
         this.battleVSPanelAnimator.SetTrigger("Close");
+
+        ScoreManager.Instance?.SetDefaultScores(); // de tam o day
         StartCoroutine(this.LoadScene());
     }
 
