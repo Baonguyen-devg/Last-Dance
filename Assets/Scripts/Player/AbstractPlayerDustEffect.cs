@@ -22,18 +22,18 @@ namespace DefaultNamespace
         {
             if (!GameManager.Instance.IsGamePlaying() || !groundCheck.IsGround()) return;
 
-            if (GetKeyRightDown()) CreateAndDestroyFootParticle(footPSRightTransform);
+            if (GetKeyRightDown()) CreateParticle(footPSRightTransform);
 
-            if (GetKeyUpDown()) CreateAndDestroyFootParticle(footPSUpTransform);
+            if (GetKeyUpDown()) CreateParticle(footPSUpTransform);
 
-            if (GetKeyLeftDown()) CreateAndDestroyFootParticle(footPSLeftTransform);
+            if (GetKeyLeftDown()) CreateParticle(footPSLeftTransform);
         }
 
         protected abstract bool GetKeyLeftDown();
         protected abstract bool GetKeyUpDown();
         protected abstract bool GetKeyRightDown();
 
-        protected virtual void CreateAndDestroyFootParticle(Transform particlePrefab)
+        protected virtual void CreateParticle(Transform particlePrefab)
         {
             Transform footPS = EffectPoolingObject.Instance.GetTransform(particlePrefab);
             footPS.position = groundCheck.GetHitPoint();
