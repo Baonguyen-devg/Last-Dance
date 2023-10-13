@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterManager : AutoMonoBehaviour 
 {
@@ -8,9 +9,10 @@ public class CharacterManager : AutoMonoBehaviour
     [SerializeField] private CharacterCarousel characterCarousel;
 
     [Header("[ Informations of character selected ]"), Space(6)]
-    [SerializeField] private Text nameCharacter;
+    [SerializeField] private TextMeshProUGUI nameCharacter;
     [SerializeField] private int index = 0;
     [SerializeField] private string namePlayer = "Player_One";
+    [SerializeField] private VSPanelLoadCharacterData vSPanelLoadCharacterData;
 
     public CharacterLoader CharacterLoader => this.characterLoader;
     public int Count => this.index;
@@ -20,7 +22,12 @@ public class CharacterManager : AutoMonoBehaviour
     {
         this.characterCarousel = transform.Find("Load Characters").GetComponent<CharacterCarousel>();
         this.characterLoader = transform.Find("Load Characters").GetComponent<CharacterLoader>();
-        this.nameCharacter = transform.Find("Character Name Text").GetComponent<Text>();
+        this.nameCharacter = transform.Find("Character Name Text").GetComponent<TextMeshProUGUI>();
+
+        this.vSPanelLoadCharacterData = 
+            GameObject.Find("Canvas")
+                      .transform.Find("Battle VS Panel")
+                      .GetComponent<VSPanelLoadCharacterData>();
     }
 
     protected virtual void Start()
@@ -69,6 +76,7 @@ public class CharacterManager : AutoMonoBehaviour
             Debug.Log("Character random is :" + name, gameObject);
         }
         PlayerPrefs.SetString(this.namePlayer, name);
+        this.vSPanelLoadCharacterData.LoadDataByName(this.namePlayer);
     }
 
     private void UpdateCharacterDisplay(
