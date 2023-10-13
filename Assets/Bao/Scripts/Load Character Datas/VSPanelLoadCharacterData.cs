@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,13 @@ public class VSPanelLoadCharacterData : BaseLoadCharacterData
         this.LoadData(this.battleVSPlayer_2, "Player_Two");
     }
 
+    public virtual void LoadDataByName(
+        string nameCharacter
+    ){
+        if (nameCharacter.Equals("Player_One")) this.LoadData(this.battleVSPlayer_1, "Player_One");
+        else this.LoadData(this.battleVSPlayer_2, "Player_Two");
+    }
+
     private void LoadData(
         Transform battleVSPlayer,
         string nameKey
@@ -37,6 +45,6 @@ public class VSPanelLoadCharacterData : BaseLoadCharacterData
         Character character
     ) {
         battleVsPlayer.Find("Model").GetComponent<Image>().sprite = character.Sprite;
-        battleVsPlayer.Find("Name").GetComponent<Text>().text = character.NameCharacter;
+        battleVsPlayer.Find("Name").GetComponent<TextMeshProUGUI>().text = character.NameCharacter;
     }
 }

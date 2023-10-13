@@ -20,5 +20,3 @@ MonoBehaviour:
     backgroundObject: {fileID: 7183836996321744764, guid: 9ca28333692ff0148965c6b7d575a7b2, type: 3}
   - nameBackground: Background 3
     backgroundObject: {fileID: 2670763905159971440, guid: 5ab0e5831d95b794da77f88e8c546b71, type: 3}
-  - nameBackground: Background 4
-    backgroundObject: {fileID: 2459939355151975727, guid: db0d9435108fe9b40a8a932abdd7ed70, type: 3}
