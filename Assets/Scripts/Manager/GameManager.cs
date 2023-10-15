@@ -44,6 +44,8 @@ public class GameManager : Singleton<GameManager>
 
     public void TogglePauseGame()
     {
+        if (!IsGamePlaying()) return;
+        
         isGamePause = !isGamePause;
         if (isGamePause) {
             Time.timeScale = 0;
