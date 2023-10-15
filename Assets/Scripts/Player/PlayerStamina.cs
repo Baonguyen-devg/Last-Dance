@@ -6,6 +6,7 @@ public class PlayerStamina : MonoBehaviour
     [SerializeField] private int staminaDefault = 100;
     [SerializeField] private int staminaInputUse = 1;
     [SerializeField] private int staminaRecoveryFactor = 2;
+    [SerializeField] private CartoonStunEffect cartoonStunEffect;
 
     private PlayerController playerController;
     private int currentStamina;
@@ -22,7 +23,11 @@ public class PlayerStamina : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.IsGamePlaying()) return;
+        if (!GameManager.Instance.IsGamePlaying())
+        {
+            ActiveStunEffect(false);
+            return;
+        }
         HandleRecovery();
     }
 
@@ -30,14 +35,22 @@ public class PlayerStamina : MonoBehaviour
     {
         if (isPassive)
         {
-            if (IsRecovered()) isPassive = false;
+            if (IsRecovered())
+            {
+                isPassive = false;
+                ActiveStunEffect(false);
+            }
             else currentStamina += staminaInputUse * staminaRecoveryFactor;
         }
         else
         {
             if (IsInput())
             {
-                if (IsRunOutStamina()) isPassive = true;
+                if (IsRunOutStamina())
+                {
+                    isPassive = true;
+                    ActiveStunEffect(true);
+                }
                 else currentStamina -= staminaInputUse;
             }
             else
@@ -59,6 +72,12 @@ public class PlayerStamina : MonoBehaviour
         return abstractPlayerMovement.GetLeftKey() 
                || abstractPlayerMovement.GetUpKey() 
                || abstractPlayerMovement.GetRightKey();
+    }
+
+    private void ActiveStunEffect(bool active)
+    {
+        if (cartoonStunEffect == null) return;
+        cartoonStunEffect.SetOnStun(active);
     }
 
     private bool IsRunOutStamina() => currentStamina <= 0;
