@@ -86,14 +86,12 @@ public class GameManager : Singleton<GameManager>
             case State.EndGame:
                 break;
         }
-        Debug.Log(state.ToString());
     }
-    
 
-    public void GameOver()
-    {
-        OnGameOver?.Invoke(null, EventArgs.Empty);
-    }
+
+    public void GameOver() => OnGameOver?.Invoke(null, EventArgs.Empty);
+
+    public void GameUnPaused() => OnGameUnpaused?.Invoke(null, EventArgs.Empty);
 
     public void PlayerOneWin()
     {
@@ -118,6 +116,8 @@ public class GameManager : Singleton<GameManager>
     public float GetCoundownToStartTimer() => countdownToStartPlay;
 
     public float GetCountDownToRelay() => countdownToReplay;
+
+    //public void SetGamePause(bool status) =>
 
     //Bao
     public void SetStateCountDownToStart()

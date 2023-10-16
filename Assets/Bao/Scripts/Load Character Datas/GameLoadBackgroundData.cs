@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameLoadBackgroundData : BaseLoadBackgroundData
 {
+    #region Main methods
     protected override void Start()
     {
         base.Start();
@@ -21,5 +22,6 @@ public class GameLoadBackgroundData : BaseLoadBackgroundData
     ) {
         background.gameObject.SetActive(true);
         background.SetParent(transform);
-    } 
+    }
+    #endregion
 }

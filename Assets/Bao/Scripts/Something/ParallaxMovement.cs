@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ParallaxMovement : AutoMonoBehaviour
 {
+    #region Variables
     [Header("[ Component ]"), Space(6)]
     [SerializeField] private Transform cam;
 
@@ -12,15 +13,20 @@ public class ParallaxMovement : AutoMonoBehaviour
     [SerializeField] private float len = default;
     [SerializeField] private float posCamera = default;
     [SerializeField] private float speed = 0.01f;
+    #endregion
 
+    #region Load component methods
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
+        base.LoadComponent();
         this.cam = GameObject.Find("Main Camera").transform;
         this.len = GetComponent<SpriteRenderer>().bounds.size.x;
         this.posCamera = this.cam.position.x;
     }
+    #endregion
 
+    #region Main methods
     private void Update()
     {
         this.Move();
@@ -44,4 +50,5 @@ public class ParallaxMovement : AutoMonoBehaviour
         Vector3 newPos = new Vector3(posX, transform.position.y, transform.position.z);
         transform.position = newPos;
     }
+    #endregion
 }
