@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class RandomBackground : BaseLoadBackgroundData
 {
-    private void Start() => this.LoadData(PlayerPrefs.GetString("Background"));
+    #region Main methods
+    protected override void Start()
+    {
+        base.LoadComponent();
+        this.LoadData(PlayerPrefs.GetString("Background"));
+    }
 
     private void LoadData(
         string nameKey
@@ -15,4 +20,5 @@ public class RandomBackground : BaseLoadBackgroundData
         bg.gameObject.SetActive(true);
         bg.SetParent(transform);
     }
+    #endregion
 }

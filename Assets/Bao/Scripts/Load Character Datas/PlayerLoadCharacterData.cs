@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class PlayerLoadCharacterData : BaseLoadCharacterData
 {
+    private readonly string DEFAULT_HEAD_PLAYER_NAME = "_Head";
+
+    #region Variables
     [Space(12), Header("[ Player 1 and Player 2 sprite ]"), Space(6)]
     [SerializeField] private SpriteRenderer spritePlayer_1;
     [SerializeField] private SpriteRenderer spritePlayer_2;
+    #endregion
 
+    #region Load component methods
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
@@ -16,27 +22,35 @@ public class PlayerLoadCharacterData : BaseLoadCharacterData
         this.LoadSpritePlayer("Player_Two", this.spritePlayer_2);
     }
 
-    private void LoadSpritePlayer(
+    public Sprite LoadSpritePlayer(
         string name, 
         SpriteRenderer spriteRenderer
     ) {
-        Transform headPlayer = GameObject.Find(name).transform.Find(name + "_Head");
+        Transform headPlayer = GameObject.Find(name).transform.Find(this.StringBuiderText(name));
         spriteRenderer = headPlayer.Find("Model").GetComponent<SpriteRenderer>();
-        this.LoadData(spriteRenderer, name);
+        return this.LoadData(spriteRenderer, name);
     }
 
-    private void LoadData(
+    private string StringBuiderText(
+        string name
+    ) => new StringBuilder().Append(name).Append(DEFAULT_HEAD_PLAYER_NAME).ToString();
+
+    private Sprite LoadData(
         SpriteRenderer spritePlayer,
         string nameKey
     ) {
         string nameCharacter = PlayerPrefs.GetString(nameKey);
         Character character = this.characterDatabaseSO.GetCharacterByName(nameCharacter);
         spritePlayer.transform.localScale = character.RateScale;
-        this.SetData(spritePlayer, character);
+        return this.SetData(spritePlayer, character);
     }
 
-    private void SetData(
+    private Sprite SetData(
         SpriteRenderer battleVsPlayer,
         Character character
-    ) => battleVsPlayer.sprite = character.Sprite;
+    ) {
+        battleVsPlayer.sprite = character.Sprite;
+        return character.Sprite;
+    }
+    #endregion
 }
