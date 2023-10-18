@@ -7,20 +7,41 @@ namespace DefaultNamespace
     {
         //Dat
         [SerializeField] private float slowMotionFactor = 0.05f;
-
-        private bool isSlowMotion;
-
-        private void Awake() => isSlowMotion = false;
-
+        
+        private bool isSlowMotion = false;
+        private bool isFinishSlowMotionEndGame = false;
+        private float timeSlowMotionEndGame = 0.5f;
+        
         private void LateUpdate()
         {
-            if (!GameManager.Instance.IsGamePlaying())
+            if (isFinishSlowMotionEndGame)
             {
-                SetDefaultTimes();
-                isSlowMotion = true;
+                TimeManager.Instance.ResetToDefaultTimes();
                 return;
             }
-            
+
+            if (ScoreManager.Instance.IsOnePlayerMaxScore())
+            {
+                DoSlowMotion();
+                timeSlowMotionEndGame -= Time.fixedDeltaTime;
+                if (timeSlowMotionEndGame <= 0) 
+                    isFinishSlowMotionEndGame = true;
+                return;
+            }
+
+            if (GameManager.Instance.IsGamePause()) return;
+            if (!GameManager.Instance.IsGamePlaying())
+            {
+                TimeManager.Instance.ResetToDefaultTimes();
+                return;
+            }
+
+            HandleSlowMotion();
+        }
+
+
+        private void HandleSlowMotion()
+        {
             if (IsWarning() && !isSlowMotion)
             {
                 isSlowMotion = true;
@@ -29,15 +50,9 @@ namespace DefaultNamespace
 
             if (!IsWarning())
             {
-                SetDefaultTimes();
+                TimeManager.Instance.ResetToDefaultTimes();
                 isSlowMotion = false;
             }
-        }
-
-        private static void SetDefaultTimes()
-        {
-            Time.timeScale = 1f;
-            Time.fixedDeltaTime = 0.02f;
         }
 
         private bool IsWarning()

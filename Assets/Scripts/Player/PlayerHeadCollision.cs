@@ -13,21 +13,25 @@ namespace DefaultNamespace
         private HingeJoint2D hingeJoint2D;
         private new Rigidbody2D rigidbody2D;
         private CircleCollider2D circleCollider2D;
+        private EffectHeadSmokeTail effectHeadSmokeTail;
         
         private void Start()
         {
             hingeJoint2D = GetComponent<HingeJoint2D>();
             rigidbody2D = GetComponent<Rigidbody2D>();
             circleCollider2D = GetComponent<CircleCollider2D>();
+            effectHeadSmokeTail = GetComponent<EffectHeadSmokeTail>();
         }
 
         private void OnCollisionEnter2D(Collision2D collision2D)
         {
             if (!GameManager.Instance.IsGamePlaying()) return;
+            if(ScoreManager.Instance.IsOnePlayerMaxScore()) {ShakeCamera(); return;}
             if (collision2D.gameObject.GetComponent<IDeadCollision>() == null) return;
             DisableComponent();
-            BounceHeadAndSpawnParticle(collision2D);
+            SpawnBounceHeadAndSpawnParticle(collision2D);
             ShakeCamera();
+            SetHeadTail();
             SetStateOnePlayerWin();
         }
 
@@ -37,11 +41,11 @@ namespace DefaultNamespace
             this.circleCollider2D.enabled = false;
         }
 
-        private void BounceHeadAndSpawnParticle(Collision2D collision2D)
+        private void SpawnBounceHeadAndSpawnParticle(Collision2D collision2D)
         {
              rigidbody2D.gravityScale = 0f;
              Vector2 contactPoint = collision2D.GetContact(0).point;
-             CreateParticle(EffectPoolingObject.Instance.GetPrefabList()[3], contactPoint);
+             CreateParticleAtContactPoint(EffectPoolingObject.Instance.GetPrefabList()[3], contactPoint);
              
              Vector2 reflectVectorNormalize = Vector2.Reflect(rigidbody2D.velocity, contactPoint.normalized).normalized;
              if (reflectVectorNormalize.y < 0) reflectVectorNormalize.y = -reflectVectorNormalize.y;
@@ -49,7 +53,7 @@ namespace DefaultNamespace
              rigidbody2D.velocity = reflectVectorNormalize * reflectForce;
         }
         
-        protected virtual void CreateParticle(Transform particlePrefab, Vector2 contactPoint)
+        protected virtual void CreateParticleAtContactPoint(Transform particlePrefab, Vector2 contactPoint)
         {
             Transform headBounce = EffectPoolingObject.Instance.GetTransform(particlePrefab);
             headBounce.position = contactPoint;
@@ -60,6 +64,12 @@ namespace DefaultNamespace
         {
             if (cameraAnimation == null) return;
             cameraAnimation.Shake();
+        }
+        
+        private void SetHeadTail()
+        {
+            if (effectHeadSmokeTail == null) return;
+            effectHeadSmokeTail.Smoke();
         }
         
         private void SetStateOnePlayerWin()

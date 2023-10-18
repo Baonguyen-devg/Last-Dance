@@ -18,19 +18,21 @@ public class GameManager : Singleton<GameManager>
     {
         CountdownToStart,
         GamePlaying,
+        Pause,
         OnePlayerDead,
         EndGame,
     }
     
+    private float countdownToStartPlay;
     private State state;
-    [SerializeField] private float countdownToStartPlay;
-    private float countdownToReplay = DEFAULT_COUNTDOWN_TO_RELAY; // Thay doi lai 
-    private bool isGamePause = false;
+    private float countdownToReplay = DEFAULT_COUNTDOWN_TO_RELAY; 
+    private bool isGamePause;
 
     protected override void Awake()
     {
         base.Awake();
         state = State.CountdownToStart;
+        isGamePause = false;
     }
 
     private void Start()
@@ -44,16 +46,24 @@ public class GameManager : Singleton<GameManager>
 
     public void TogglePauseGame()
     {
-        if (!IsGamePlaying()) return;
-        
-        isGamePause = !isGamePause;
-        if (isGamePause) {
-            Time.timeScale = 0;
-            OnGamePaused?.Invoke(this, EventArgs.Empty);
-        }else {
-            Time.timeScale = 1;
-            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+        if (IsGamePlaying() || IsGamePause())
+        {
+            isGamePause = !isGamePause;
+            if (isGamePause) PauseGame();
+            else UnpauseGame();
         }
+    }
+
+    private void PauseGame()
+    {
+        state = State.Pause;
+        OnGamePaused?.Invoke(this, EventArgs.Empty);
+    }
+    
+    public void UnpauseGame()
+    {
+        state = State.GamePlaying;
+        OnGameUnpaused?.Invoke(this, EventArgs.Empty);
     }
     
     private void Update()
@@ -64,13 +74,9 @@ public class GameManager : Singleton<GameManager>
                 countdownToStartPlay -= Time.deltaTime;
                 if (countdownToStartPlay <= 0)
                 {
-                    // DEFAULT_COUNTDOWN_START thay doi lai
                     countdownToStartPlay = DEFAULT_COUNTDOWN_START;
                     state = State.GamePlaying;
                 }
-                break;
-            
-            case State.GamePlaying:
                 break;
             
             case State.OnePlayerDead:
@@ -82,16 +88,8 @@ public class GameManager : Singleton<GameManager>
                     EndGame();
                 }
                 break;
-            
-            case State.EndGame:
-                break;
         }
     }
-
-
-    public void GameOver() => OnGameOver?.Invoke(null, EventArgs.Empty);
-
-    public void GameUnPaused() => OnGameUnpaused?.Invoke(null, EventArgs.Empty);
 
     public void PlayerOneWin()
     {
@@ -105,20 +103,6 @@ public class GameManager : Singleton<GameManager>
         ScoreManager.Instance.IncreaseScorePlayerTwo(1);
     }
     
-    public bool IsGamePlaying() => state == State.GamePlaying;
-    
-    public bool IsCountDownToStartIsActive() => state == State.CountdownToStart;
-    
-    public bool IsOnePlayerDead() => state == State.OnePlayerDead;
-
-    public bool IsEndGame() => state == State.EndGame;
-    
-    public float GetCoundownToStartTimer() => countdownToStartPlay;
-
-    public float GetCountDownToRelay() => countdownToReplay;
-
-    //public void SetGamePause(bool status) =>
-
     //Bao
     public void SetStateCountDownToStart()
     {
@@ -131,6 +115,8 @@ public class GameManager : Singleton<GameManager>
         if (ScoreManager.Instance.IsOnePlayerMaxScore()) this.GameOver();
         else this.PlayAgain();
     }
+    
+    public void GameOver() => OnGameOver?.Invoke(null, EventArgs.Empty);
 
     public void PlayAgain()
     {
@@ -138,5 +124,11 @@ public class GameManager : Singleton<GameManager>
         int numberScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(numberScene);
     }
+    
+    public bool IsGamePlaying() => state == State.GamePlaying;
+    
+    public bool IsOnePlayerDead() => state == State.OnePlayerDead;
+
+    public bool IsGamePause() => state == State.Pause;
 }
 
