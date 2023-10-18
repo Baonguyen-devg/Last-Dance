@@ -35,3 +35,6 @@ MonoBehaviour:
   - nameCharacter: Tran Van Bao Thang
     sprite: {fileID: 21300000, guid: 220f4602fb90b7b4881e8fba7f01aeca, type: 3}
     rateScale: {x: 1.2, y: 1.2, z: 0}
+  - nameCharacter: Hoang Hong An
+    sprite: {fileID: 21300000, guid: 2c619560e98fd3446a131828519c9181, type: 3}
+    rateScale: {x: 1.1, y: 1.1, z: 0}

@@ -9,7 +9,7 @@ namespace DefaultNamespace.UI.GameScene
     public class GameOverUI : AutoMonoBehaviour
     {
         private readonly float TIME_APPEAR_UI_END_GAME = 1f;
-        private readonly float TIME_EMPTY = 0.5f;
+        private readonly float TIME_EMPTY = 1f;
 
         private readonly string APPEAR_KO_TRIGGER = "AppearKOText";
         private readonly string APPEAR_UI_TRIGGER = "AppearUIEndGame";

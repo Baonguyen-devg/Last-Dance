@@ -13,5 +13,8 @@ namespace DefaultNamespace
             if(Instance != null) Debug.LogError("EffectPoolingObject is already initialized!");
             Instance = this;
         }
+
+        public Transform GetTransformByIndex(int index) 
+            => GetTransform(prefabList[index]);
     }
 }
